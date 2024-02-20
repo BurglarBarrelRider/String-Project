@@ -1,5 +1,5 @@
 #include <iostream>
-#include <fstream> // файловый ввод и вывод
+// #include <fstream> // файловый ввод и вывод
 #include <string>
 #include <ctime>  // псевдо-рандомные числа на основе текущего времени
 #include <random> // для рандомайзера
