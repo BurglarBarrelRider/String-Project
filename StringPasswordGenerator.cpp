@@ -5,13 +5,16 @@
 #include <random> // для рандомайзера
 using namespace std;
 
-
+//const string RED = "\033[1;31m";
+//const string YELLOW = "\033[1;33m";
+//const string BLUE = "\033[1;34m";  
+//const string RESET_COLOR = "\033[0m";
 
 bool includeCharType(string answer, string characterType) { 
     return (answer == "Y" || answer == "y") && !characterType.empty(); // Y||y && не пустой(любой другой символ)
 }
 
-char randomCharacter(string characters, mt19937& gen) {
+char intoRandomCharacter(string characters, mt19937& gen) {
     uniform_int_distribution<int> dist(0, characters.size() - 1); // char.size - 1 чтобы размер ограничить
     return characters[dist(gen)]; // возврат случайного индекса для замещения буквой, символом< числом
 }
@@ -61,7 +64,7 @@ int main() {
     cout << "Your password_ ";
     string password;
     for (int i = 0; i < maxLength; i++) {
-        char randomChar = randomChar(charContainer, generator);
+        char randomChar = intoRandomChar(charContainer, generator);
         cout << randomChar;
         password += randomChar;
     }
@@ -70,13 +73,13 @@ int main() {
     
     // Simple password strength check
     int passwordStrength = calculate_password_strength(password);
-    if (passwordStrength == 0) {
+    if (passwordStrength == 0 && passwordStrength <= 4) {
         cout << endl << "Password is weak";
     }
-    else if ( passwordStrength > 0 && passwordStrength <= 4) {
+    else if ( passwordStrength > 4 && passwordStrength <= 7) {
         cout << endl << "Password is average";
     }
-    else if (passwordStrength > 4) {
+    else if (passwordStrength > 8) {
         cout << endl << "Password is strong";
     }
 
