@@ -11,7 +11,7 @@ bool includeCharType(string answer, string characterType) {
     return (answer == "Y" || answer == "y") && !characterType.empty(); // Y||y && не пустой(любой другой символ)
 }
 
-char getRandomChar(string characters, mt19937& gen) {
+char randomCharacter(string characters, mt19937& gen) {
     uniform_int_distribution<int> dist(0, characters.size() - 1); // char.size - 1 чтобы размер ограничить
     return characters[dist(gen)]; // возврат случайного индекса для замещения буквой, символом< числом
 }
@@ -45,23 +45,23 @@ int main() {
     cin >> answerNumbers;
     
     // тут создаем строку-контейнер для наших букв, цифр, символов
-    string selectedChars = "abcdefghijklmnopqrstuvwxyz"; // by default
+    string charContainer = "abcdefghijklmnopqrstuvwxyz"; // by default
 
     if (includeCharType(answerUppercase, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")) // если пользователь нажал на Y, начинает заполнять контейнер
-        selectedChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        charContainer += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     if (includeCharType(answerSymbols, "<>{}()[].,/';:_*&^%$#@!?№-"))
-        selectedChars += "<>{}()[].,/';:_*&^%$#@!?№-";
+        charContainer += "<>{}()[].,/';:_*&^%$#@!?№-";
     
     if (includeCharType(answerNumbers, "1234567890"))
-        selectedChars += "1234567890";
+        charContainer += "1234567890";
 
     mt19937 generator(time(0)); // shuffle mechanism
 
     cout << "Your password_ ";
     string password;
     for (int i = 0; i < maxLength; i++) {
-        char randomChar = getRandomChar(selectedChars, generator);
+        char randomChar = randomChar(charContainer, generator);
         cout << randomChar;
         password += randomChar;
     }
@@ -141,23 +141,23 @@ int main() {
 //     cin >> answerNumbers;
     
 //     // тут создаем строку-контейнер для наших букв, цифр, символов
-//     string selectedChars = "abcdefghijklmnopqrstuvwxyz";
+//     string charContainer = "abcdefghijklmnopqrstuvwxyz";
 
 //     if (includeCharacterType(answerUppercase, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")))) // если пользователь нажал на Y, начинает заполнять контейнер
-//         selectedChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//         charContainer += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
 //     if (includeCharacterType(answerSymbols, "<>{}()[].,/';:_*&^%$#@!?№-"))
-//         selectedChars += "_*&^%$#@!?№-";
+//         charContainer += "_*&^%$#@!?№-";
     
 //     if (includeCharacterType(answerNumbers, "0123456789"))
-//         selectedChars += "0123456789";
+//         charContainer += "0123456789";
 
 //     mt19937 generator(time(0)); // shuffle mechanism
 
 //         fout << "Your password_ ";
 //     string password;
 //     for (int i = 0; i < maxLength; i++) {
-//         char randomChar = getRandomChar(selectedChars, generator);
+//         char randomChar = getRandomChar(charContainer, generator);
 //         fout << randomChar;
 //         password += randomChar;
 //     }
