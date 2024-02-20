@@ -64,7 +64,7 @@ int main() {
     cout << "Your password_ ";
     string password;
     for (int i = 0; i < maxLength; i++) {
-        char randomChar = intoRandomChar(charContainer, generator);
+        char randomChar = intoRandomCharacter(charContainer, generator);
         cout << randomChar;
         password += randomChar;
     }
