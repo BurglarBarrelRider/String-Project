@@ -48,17 +48,33 @@ int main() {
     cin >> answerNumbers;
     
     // тут создаем строку-контейнер для наших букв, цифр, символов
-    string charContainer = "abcdefghijklmnopqrstuvwxyz"; // by default
+    // string charContainer = "abcdefghijklmnopqrstuvwxyz"; // by default
 
-    if (includeCharType(answerUppercase, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")) // если пользователь нажал на Y, начинает заполнять контейнер
-        charContainer += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // if (includeCharType(answerUppercase, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")) // если пользователь нажал на Y, начинает заполнять контейнер
+    //     charContainer += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
-    if (includeCharType(answerSymbols, "<>{}()[].,/';:_*&^%$#@!?№-"))
-        charContainer += "<>{}()[].,/';:_*&^%$#@!?№-";
+    // if (includeCharType(answerSymbols, "<>{}()[].,/';:_*&^%$#@!?№-"))
+    //     charContainer += "<>{}()[].,/';:_*&^%$#@!?№-";
     
-    if (includeCharType(answerNumbers, "1234567890"))
-        charContainer += "1234567890";
+    // if (includeCharType(answerNumbers, "1234567890"))
+    //     charContainer += "1234567890";
 
+    // mt19937 generator(time(0)); // shuffle mechanism
+
+    // cout << "Your password_ ";
+    // string password;
+    // for (int i = 0; i < maxLength; i++) {
+    //     char randomChar = intoRandomCharacter(charContainer, generator);
+    //     cout << randomChar;
+    //     password += randomChar;
+    // }
+    
+    string lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+    string uppercaseChars = includeCharType(answerUppercase, "ABCDEFGHIJKLMNOPQRSTUVWXYZ") ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "";
+    string symbolChars = includeCharType(answerSymbols, "<>{}()[].,/';:_*&^%$#@!?№-") ? "<>{}()[].,/';:_*&^%$#@!?№-" : "";
+    string numberChars = includeCharType(answerNumbers, "1234567890") ? "1234567890" : "";
+
+    string charContainer = lowercaseChars + uppercaseChars + symbolChars + numberChars;
     mt19937 generator(time(0)); // shuffle mechanism
 
     cout << "Your password_ ";
