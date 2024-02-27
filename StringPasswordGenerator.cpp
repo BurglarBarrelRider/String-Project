@@ -69,23 +69,43 @@ int main() {
     //     password += randomChar;
     // }
     
+    string password = "";
     string lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
     string uppercaseChars = includeCharType(answerUppercase, "ABCDEFGHIJKLMNOPQRSTUVWXYZ") ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "";
     string symbolChars = includeCharType(answerSymbols, "<>{}()[].,/';:_*&^%$#@!?№-") ? "<>{}()[].,/';:_*&^%$#@!?№-" : "";
     string numberChars = includeCharType(answerNumbers, "1234567890") ? "1234567890" : "";
 
+    mt19937 generator(time(0));
+    
+    if (answerUppercase == "y") {
+        password += uppercaseChars[generator() % uppercaseChars.size()];
+        maxLength--;
+    }
+    if (answerNumbers == "y") {
+        password += numberChars[generator() % numberChars.size()];
+        maxLength--;
+    }
+    if (answerSymbols == "y") {
+        password += symbolChars[generator() % symbolChars.size()];
+        maxLength--;
+    }
     string charContainer = lowercaseChars + uppercaseChars + symbolChars + numberChars;
-    mt19937 generator(time(0)); // shuffle mechanism
+    
+    if (charContainer.empty()) {
+        cerr << "Error: No character types selected for the password." << endl;
+        return 1;
+    }
 
-    cout << "Your password_ ";
-    string password;
+
+    cout << "Your password: ";
+    
     for (int i = 0; i < maxLength; i++) {
         char randomChar = intoRandomCharacter(charContainer, generator);
-        cout << randomChar;
+        // cout << randomChar;
         password += randomChar;
     }
 
-    cout << endl;
+    cout << password << endl;
     
     // Simple password strength check
     int passwordStrength = calculate_password_strength(password);
